@@ -9,8 +9,8 @@ interface MapProps {
 }
 
 const containerStyle = {
-  width: "100%",
-  height: "70vh",
+  width: "100vw",
+  height: "100vh",
 };
 
 const defaultCenter = {
@@ -42,7 +42,7 @@ const WeatherMap: React.FC<MapProps> = ({ onLocationSelect }) => {
   };
 
   return (
-    <div className="map-container w-full">
+    <div className="size-full">
       <LoadScript
         googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
       >
