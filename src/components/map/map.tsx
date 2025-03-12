@@ -1,15 +1,22 @@
-"use client";
+'use client';
 
 import { useState, useCallback, useRef } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { LatLng } from "@/types/location";
+import { getWeatherData } from "@/actions/weather-actions";
+
+
+interface LatLng {
+  lat: number;
+  lng: number;
+}
 
 interface MapProps {
   onLocationSelect: (location: LatLng) => void;
+  initialLocation?: LatLng;
 }
 
 const containerStyle = {
-  width: "100vw",
+  width: "100%",
   height: "100vh",
 };
 
@@ -18,13 +25,18 @@ const defaultCenter = {
   lng: 21.0122,
 };
 
-const WeatherMap: React.FC<MapProps> = ({ onLocationSelect }) => {
-  const [selectedLocation, setSelectedLocation] = useState<LatLng | null>(null);
+const WeatherMap: React.FC<MapProps> = ({ onLocationSelect, initialLocation }) => {
+  const [selectedLocation, setSelectedLocation] = useState<LatLng | null>(initialLocation || null);
   const mapRef = useRef<google.maps.Map | null>(null);
 
   const onLoad = useCallback(function callback(map: google.maps.Map) {
     mapRef.current = map;
-  }, []);
+    
+    if (initialLocation) {
+      setSelectedLocation(initialLocation);
+      onLocationSelect(initialLocation);
+    }
+  }, [initialLocation, onLocationSelect]);
 
   const onUnmount = useCallback(function callback() {
     mapRef.current = null;
@@ -36,20 +48,19 @@ const WeatherMap: React.FC<MapProps> = ({ onLocationSelect }) => {
         lat: e.latLng.lat(),
         lng: e.latLng.lng(),
       };
+      getWeatherData(newLocation)
       setSelectedLocation(newLocation);
       onLocationSelect(newLocation);
     }
   };
 
   return (
-    <div className="size-full">
-      <LoadScript
-        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
-      >
+    <div className="rounded-lg overflow-hidden shadow-lg">
+      <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}>
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={defaultCenter}
-          zoom={6}
+          center={initialLocation || defaultCenter}
+          zoom={initialLocation ? 10 : 6}
           onLoad={onLoad}
           onUnmount={onUnmount}
           onClick={handleMapClick}
