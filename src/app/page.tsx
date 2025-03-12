@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import WeatherMap from "@/components/map/GoogleMap";
+import WeatherMap from "@/components/map/map";
 import { LatLng } from "@/types/location";
 import Loader from "@/components/ui/Loader";
 

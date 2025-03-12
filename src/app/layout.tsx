@@ -1,5 +1,5 @@
-// src/app/layout.tsx
-import Header from '@/components/layout/Header';
+import Header from '@/components/layout/header';
+import ReactQueryProvider from '@/providers/query-provider';
 import './globals.css';
 
 export const metadata = {
@@ -15,10 +15,12 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body>
-        <Header />
-        <main className="container">
-          {children}
-        </main>
+        <ReactQueryProvider>
+          <Header />
+          <main>
+            {children}
+          </main>
+        </ReactQueryProvider>
       </body>
     </html>
   );
