@@ -1,31 +1,39 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { MapIcon } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
-  
+
   return (
     <header className="bg-blue-400 text-white shadow-md absolute z-100 w-full">
-      <nav className="container mx-auto md:px-4 md:py-4 px-2 py-2 flex justify-between items-center">
-        <div className="md:text-xl text-md font-bold">Mapa Pogodowa</div>
-        <ul className="flex space-x-3 md:space-x-6">
+      <nav className="container mx-auto md:px-4 md:py-4 px-3 py-5 flex sm:flex-row flex-col justify-between gap-3 items-center">
+        <div className="md:text-xl text-md font-bold flex flex-row md:gap-4 gap:2 items-center font-[font2]">
+          <MapIcon />
+          Mapa Pogodowa
+        </div>
+        <ul className="flex space-x-4 md:space-x-6">
           <li>
-            <Link 
-              href="/" 
-              className={`hover:underline transition-colors ${
-                pathname === '/' ? 'border-1 border-white sm:p-2 p-1 rounded-md font-medium' : ''
+            <Link
+              href="/"
+              className={`hover:underline transition-colors font-[font1] ${
+                pathname === "/"
+                  ? "underline underline-offset-2 md:underline-offset-5 font-semibold"
+                  : ""
               }`}
             >
               Mapa
             </Link>
           </li>
           <li>
-            <Link 
-              href="/history" 
-              className={`hover:underline transition-colors ${
-                pathname === '/history' ? 'border-1 border-white sm:p-2 p-1  rounded-md font-medium' : ''
+            <Link
+              href="/history"
+              className={`hover:underline transition-colors font-[font1] ${
+                pathname === "/history"
+                  ? "underline underline-offset-2 md:underline-offset-5 font-semibold"
+                  : ""
               }`}
             >
               Historia i Statystyki

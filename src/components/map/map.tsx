@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
 import { useState, useCallback, useRef } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { LatLng } from "@/types/common";
 import { containerStyle, defaultCenter } from "@/constants/common";
 
@@ -10,19 +10,30 @@ interface MapProps {
   initialLocation?: LatLng;
 }
 
-
-export default function WeatherMap({ onLocationSelect, initialLocation }: MapProps) {
-  const [selectedLocation, setSelectedLocation] = useState<LatLng | null>(initialLocation || null);
+export default function WeatherMap({
+  onLocationSelect,
+  initialLocation,
+}: MapProps) {
+  const [selectedLocation, setSelectedLocation] = useState<LatLng | null>(
+    initialLocation || null
+  );
   const mapRef = useRef<google.maps.Map | null>(null);
 
-  const onLoad = useCallback(function callback(map: google.maps.Map) {
-    mapRef.current = map;
-    
-    if (initialLocation) {
-      setSelectedLocation(initialLocation);
-      onLocationSelect(initialLocation);
-    }
-  }, [initialLocation, onLocationSelect]);
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
+  });
+
+  const onLoad = useCallback(
+    function callback(map: google.maps.Map) {
+      mapRef.current = map;
+
+      if (initialLocation) {
+        setSelectedLocation(initialLocation);
+        onLocationSelect(initialLocation);
+      }
+    },
+    [initialLocation, onLocationSelect]
+  );
 
   const onUnmount = useCallback(function callback() {
     mapRef.current = null;
@@ -39,20 +50,26 @@ export default function WeatherMap({ onLocationSelect, initialLocation }: MapPro
     }
   };
 
+  if (loadError) {
+    return <div>Error loading maps</div>;
+  }
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="rounded-lg overflow-hidden shadow-lg">
-      <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={initialLocation || defaultCenter}
-          zoom={initialLocation ? 10 : 6}
-          onLoad={onLoad}
-          onUnmount={onUnmount}
-          onClick={handleMapClick}
-        >
-          {selectedLocation && <Marker position={selectedLocation} />}
-        </GoogleMap>
-      </LoadScript>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={initialLocation || defaultCenter}
+        zoom={initialLocation ? 10 : 6}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        onClick={handleMapClick}
+      >
+        {selectedLocation && <Marker position={selectedLocation} />}
+      </GoogleMap>
     </div>
   );
 }

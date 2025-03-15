@@ -1,12 +1,12 @@
-import Header from '@/components/layout/header';
-import QueryProvider from '@/providers/query-provider';
-import { Toaster } from '@/components/ui/sonner';
+import Header from "@/components/layout/header";
+import QueryProvider from "@/providers/query-provider";
+import { Toaster } from "@/components/ui/sonner";
 
-import './globals.css';
+import "./globals.css";
 
 export const metadata = {
-  title: 'Aplikacja Pogodowa',
-  description: 'Sprawdź pogodę w dowolnym miejscu na świecie',
+  title: "Aplikacja Pogodowa",
+  description: "Sprawdź pogodę w dowolnym miejscu na świecie",
 };
 
 export default function RootLayout({
@@ -19,9 +19,7 @@ export default function RootLayout({
       <body>
         <QueryProvider>
           <Header />
-          <main>
-            {children}
-          </main>
+          <main>{children}</main>
           <Toaster />
         </QueryProvider>
       </body>

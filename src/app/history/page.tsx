@@ -1,10 +1,5 @@
-import HistoryPage from "@/components/history/search-history";
-import SearchStatistics from "@/components/history/search-statistics";
+import SearchHistoryDashboard from "@/components/history";
 
 export default function Page() {
-  return (
-    <div className="flex flex-col gap-6 py-20">
-      <HistoryPage /> <SearchStatistics />
-    </div>
-  );
+  return <SearchHistoryDashboard />;
 }
