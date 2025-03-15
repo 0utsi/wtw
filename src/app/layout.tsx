@@ -1,5 +1,7 @@
 import Header from '@/components/layout/header';
-import ReactQueryProvider from '@/providers/query-provider';
+import QueryProvider from '@/providers/query-provider';
+import { Toaster } from '@/components/ui/sonner';
+
 import './globals.css';
 
 export const metadata = {
@@ -15,12 +17,13 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body>
-        <ReactQueryProvider>
+        <QueryProvider>
           <Header />
           <main>
             {children}
           </main>
-        </ReactQueryProvider>
+          <Toaster />
+        </QueryProvider>
       </body>
     </html>
   );

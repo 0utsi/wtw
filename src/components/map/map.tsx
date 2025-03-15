@@ -2,30 +2,16 @@
 
 import { useState, useCallback, useRef } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { getWeatherData } from "@/actions/weather-actions";
-
-
-interface LatLng {
-  lat: number;
-  lng: number;
-}
+import { LatLng } from "@/types/common";
+import { containerStyle, defaultCenter } from "@/constants/common";
 
 interface MapProps {
   onLocationSelect: (location: LatLng) => void;
   initialLocation?: LatLng;
 }
 
-const containerStyle = {
-  width: "100%",
-  height: "100vh",
-};
 
-const defaultCenter = {
-  lat: 52.2297,
-  lng: 21.0122,
-};
-
-const WeatherMap: React.FC<MapProps> = ({ onLocationSelect, initialLocation }) => {
+export default function WeatherMap({ onLocationSelect, initialLocation }: MapProps) {
   const [selectedLocation, setSelectedLocation] = useState<LatLng | null>(initialLocation || null);
   const mapRef = useRef<google.maps.Map | null>(null);
 
@@ -48,7 +34,6 @@ const WeatherMap: React.FC<MapProps> = ({ onLocationSelect, initialLocation }) =
         lat: e.latLng.lat(),
         lng: e.latLng.lng(),
       };
-      getWeatherData(newLocation)
       setSelectedLocation(newLocation);
       onLocationSelect(newLocation);
     }
@@ -70,6 +55,4 @@ const WeatherMap: React.FC<MapProps> = ({ onLocationSelect, initialLocation }) =
       </LoadScript>
     </div>
   );
-};
-
-export default WeatherMap;
+}
