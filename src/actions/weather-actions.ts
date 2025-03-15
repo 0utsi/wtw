@@ -1,16 +1,6 @@
 'use server';
-
-interface WeatherData {
-  id: string;
-  city: string;
-  latitude: number;
-  longitude: number;
-  temperature: number;
-  description: string;
-  windSpeed: number;
-  cloudiness: number;
-  createdAt: string;
-}
+import { WeatherData } from "@/types/common";
+import { toast } from "sonner";
 
 interface LatLng {
   lat: number;
@@ -21,7 +11,7 @@ const API_URL = process.env.API_URL || 'http://localhost:3001/api';
 
 export async function getWeatherData(location: LatLng): Promise<WeatherData> {
   try {
-    const response = await fetch(`${API_URL}/weather?latitude=${location.lat}&longitude=${location.lng}`, {
+    const response = await fetch(`${API_URL}/weather?lat=${location.lat}&lng=${location.lng}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -34,9 +24,9 @@ export async function getWeatherData(location: LatLng): Promise<WeatherData> {
     }
 
     return await response.json();
-  } catch (error) {
-    console.error('Failed to fetch weather data:', error);
-    throw error;
+  } catch  {
+    toast.error("Error fetching data")
+    throw Error()
   }
 }
 
