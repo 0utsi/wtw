@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import WeatherMap from '@/components/map/map';
 import { LatLng } from '@/types/common';
-import Loader from '@/components/ui/loader';
+import SavingLoader from '@/components/ui/saving-loader';
 import WeatherDialog from '@/components/weather/weather-dialog';
 import { useWeatherData } from '@/hooks/use-weather-query';
 import { toast } from 'sonner';
@@ -46,7 +46,7 @@ export default function WeatherClient({ initialLat, initialLng }: WeatherClientP
         initialLocation={initialLat && initialLng ? { lat: initialLat, lng: initialLng } : undefined}
       />
       
-      {isLoading && <Loader />}
+      {isLoading && <SavingLoader />}
       
       <WeatherDialog 
         weatherData={weatherData ?? null}
