@@ -1,4 +1,3 @@
-
 export interface WeatherData {
   id: string;
   place: string;
@@ -24,7 +23,7 @@ export interface WeatherRecord {
   windSpeed: number;
 }
 
-export interface SearchHistoryItem {
+export interface SearchHistory {
   id: string;
   lat: number;
   lng: number;
@@ -35,4 +34,8 @@ export interface SearchHistoryItem {
 export interface LatLng {
   lat: number;
   lng: number;
+}
+
+export interface SearchHistoryProps {
+  data?: SearchHistory[];
 }
