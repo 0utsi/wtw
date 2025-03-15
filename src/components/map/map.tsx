@@ -45,6 +45,7 @@ export default function WeatherMap({
         lat: e.latLng.lat(),
         lng: e.latLng.lng(),
       };
+
       setSelectedLocation(newLocation);
       onLocationSelect(newLocation);
     }
