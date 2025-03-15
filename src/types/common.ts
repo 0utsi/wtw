@@ -11,20 +11,27 @@ export interface WeatherData {
   createdAt: string;
 }
 
-export interface SearchHistoryItem {
+export interface WeatherRecord {
   id: string;
-  place: string;
+  cloudiness: number;
+  createdAt: string;
+  description: string;
   lat: number;
   lng: number;
-  searchedAt: string;
-  weatherRecord?: {
-    id: string;
-    temperature: number;
-    description: string;
-    createdAt: string;
-  };
+  place: string;
+  searchDate: string;
+  temperature: number;
+  windSpeed: number;
 }
 
+export interface SearchHistoryItem {
+  id: string;
+  lat: number;
+  lng: number;
+  place: string;
+  searchedAt: string;
+  weatherRecord?: WeatherRecord;
+}
 export interface LatLng {
   lat: number;
   lng: number;
