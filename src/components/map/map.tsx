@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import { useState, useCallback, useRef, useEffect } from "react";
+import { GoogleMap, Libraries, useLoadScript } from "@react-google-maps/api";
 import { LatLng } from "@/types/common";
 import { containerStyle, defaultCenter } from "@/constants/common";
 
@@ -9,6 +9,8 @@ interface MapProps {
   onLocationSelect: (location: LatLng) => void;
   initialLocation?: LatLng;
 }
+
+const libraries = ["marker"];
 
 export default function WeatherMap({
   onLocationSelect,
@@ -18,10 +20,38 @@ export default function WeatherMap({
     initialLocation || null
   );
   const mapRef = useRef<google.maps.Map | null>(null);
+  const markerRef = useRef<google.maps.marker.AdvancedMarkerElement | null>(
+    null
+  );
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+    libraries: libraries as Libraries,
   });
+
+  const updateMarker = useCallback((location: LatLng) => {
+    if (!mapRef.current || !window.google?.maps?.marker) return;
+
+    if (markerRef.current) {
+      markerRef.current.map = null;
+    }
+
+    const { AdvancedMarkerElement } = window.google.maps.marker;
+
+    if (AdvancedMarkerElement) {
+      markerRef.current = new AdvancedMarkerElement({
+        map: mapRef.current,
+        position: location,
+        title: "Selected Location",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (selectedLocation && mapRef.current) {
+      updateMarker(selectedLocation);
+    }
+  }, [selectedLocation, updateMarker]);
 
   const onLoad = useCallback(
     function callback(map: google.maps.Map) {
@@ -36,6 +66,10 @@ export default function WeatherMap({
   );
 
   const onUnmount = useCallback(function callback() {
+    if (markerRef.current) {
+      markerRef.current.map = null;
+      markerRef.current = null;
+    }
     mapRef.current = null;
   }, []);
 
@@ -45,7 +79,6 @@ export default function WeatherMap({
         lat: e.latLng.lat(),
         lng: e.latLng.lng(),
       };
-
       setSelectedLocation(newLocation);
       onLocationSelect(newLocation);
     }
@@ -63,14 +96,17 @@ export default function WeatherMap({
     <div className="rounded-lg overflow-hidden shadow-lg">
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={initialLocation || defaultCenter}
-        zoom={initialLocation ? 10 : 6}
+        center={selectedLocation || initialLocation || defaultCenter}
+        zoom={selectedLocation || initialLocation ? 10 : 6}
         onLoad={onLoad}
         onUnmount={onUnmount}
         onClick={handleMapClick}
-      >
-        {selectedLocation && <Marker position={selectedLocation} />}
-      </GoogleMap>
+        options={{
+          disableDefaultUI: true,
+          clickableIcons: false,
+          mapId: "DEMO_MAP_ID",
+        }}
+      />
     </div>
   );
 }
