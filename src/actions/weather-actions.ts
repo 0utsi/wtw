@@ -41,16 +41,15 @@ export async function getSearchHistory() {
       headers: {
         "Content-Type": "application/json",
       },
-      cache: "no-store",
     });
 
     if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
+      throw new Error("Nie udało się pobrać historii");
     }
 
-    return await response.json();
+    return response.json();
   } catch (error) {
-    toast.error("Error while fetching search history");
+    console.error("Błąd podczas pobierania historii:", error);
     throw error;
   }
 }

@@ -4,24 +4,15 @@ import SearchHistory from "./search-history";
 import SearchStatistics from "./search-statistics";
 import { useSearchHistory } from "@/hooks/use-weather-query";
 import { HistorySkeleton, StatisticsSkeleton } from "../ui/skeleton";
-import { MessageCircleWarningIcon } from "lucide-react";
 
 export default function SearchHistoryDashboard() {
-  const { data: searchHistory, isLoading, isError } = useSearchHistory();
+  const { data: searchHistory, isLoading } = useSearchHistory();
 
   if (isLoading) {
     return (
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="flex flex-col sizes-full pt-25">
         <HistorySkeleton />
         <StatisticsSkeleton />
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className="text-center text-red-500">
-        <MessageCircleWarningIcon />
       </div>
     );
   }
