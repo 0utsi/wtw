@@ -1,5 +1,5 @@
-import Header from "../components/layout/header";
 import QueryProvider from "../providers/query-provider";
+import Header from "../components/layout/Header";
 import { Toaster } from "../components/ui/sonner";
 
 import "./globals.css";
