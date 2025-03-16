@@ -1,6 +1,6 @@
 "use server";
 
-import { WeatherData } from "@/types/common";
+import { WeatherData } from "../types/common";
 import { toast } from "sonner";
 
 interface LatLng {

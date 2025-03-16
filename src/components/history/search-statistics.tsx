@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import _ from "lodash";
-import { SearchHistoryProps } from "@/types/common";
+import { SearchHistoryProps } from "../../types/common";
 
 export default function SearchStatistics({ data }: SearchHistoryProps) {
   const statistics = React.useMemo(() => {

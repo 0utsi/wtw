@@ -2,8 +2,8 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import { GoogleMap, Libraries, useLoadScript } from "@react-google-maps/api";
-import { LatLng } from "@/types/common";
-import { containerStyle, defaultCenter } from "@/constants/common";
+import { LatLng } from "../../types/common";
+import { containerStyle, defaultCenter } from "../../constants/common";
 
 interface MapProps {
   onLocationSelect: (location: LatLng) => void;
