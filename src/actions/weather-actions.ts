@@ -8,7 +8,7 @@ interface LatLng {
   lng: number;
 }
 
-const API_URL = process.env.API_URL || "http://localhost:3001/api";
+const API_URL = process.env.API_URL || "https://weather-api-3v83.onrender.com";
 
 export async function getWeatherData(location: LatLng): Promise<WeatherData> {
   try {
