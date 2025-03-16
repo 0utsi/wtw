@@ -12,9 +12,9 @@ function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
 
 function HistorySkeleton() {
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm">
       <div className="py-4">
-        <Skeleton className="h-8 w-1/2 mx-auto" />
+        <Skeleton className="h-6 w-[200px] mx-auto" />
       </div>
       <div className="px-4">
         <div className="w-full border-collapse">
@@ -39,10 +39,10 @@ function HistorySkeleton() {
             ))}
           </div>
         </div>
-        <div className="flex justify-between items-center mt-4">
-          <Skeleton className="h-8 w-20" />
-          <Skeleton className="h-4 w-24" />
-          <Skeleton className="h-8 w-20" />
+        <div className="flex justify-center items-center gap-2 mt-6">
+          <Skeleton className="h-5 w-20" />
+          <Skeleton className="h-5 w-24" />
+          <Skeleton className="h-5 w-20" />
         </div>
       </div>
     </div>
@@ -51,9 +51,9 @@ function HistorySkeleton() {
 
 function StatisticsSkeleton() {
   return (
-    <div className="w-full max-w-4xl mx-auto mt-4">
+    <div className="w-full max-w-4xl mx-auto mt-4 bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm">
       <div className="py-4">
-        <Skeleton className="h-8 w-1/2 mx-auto" />
+        <Skeleton className="h-6 w-[150px] mx-auto" />
       </div>
       <div className="px-4">
         <div className="grid md:grid-cols-3 gap-4">

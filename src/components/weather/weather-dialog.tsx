@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import {
   CloudFogIcon,
@@ -75,7 +76,9 @@ export default function WeatherDialog({
                 {Math.round(weatherData.temperature)}°C
               </span>
             </div>
-            <div className="text-lg font-medium">{formattedDescription}</div>
+            <DialogDescription className="text-lg font-medium">
+              {formattedDescription}
+            </DialogDescription>
           </div>
 
           <div className="grid grid-cols-2 gap-4 border-t border-gray-200 dark:border-gray-700 pt-4">
