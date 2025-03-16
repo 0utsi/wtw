@@ -8,17 +8,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+} from "../ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationPrevious,
   PaginationNext,
-} from "@/components/ui/pagination";
+} from "../ui/pagination";
 import { useMemo } from "react";
-import { SearchHistoryProps } from "@/types/common";
+import { SearchHistoryProps } from "../../types/common";
 
 export default function SearchHistory({ data }: SearchHistoryProps) {
   const [currentPage, setCurrentPage] = React.useState(1);

@@ -1,6 +1,6 @@
 "use client";
 
-import { WeatherData } from "@/types/common";
+import { WeatherData } from "../../types/common";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogFooter,
   DialogDescription,
-} from "@/components/ui/dialog";
+} from "../ui/dialog";
 import {
   CloudFogIcon,
   ThermometerIcon,
@@ -16,7 +16,7 @@ import {
   LocateIcon,
   Globe,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 
 interface WeatherDialogProps {
   weatherData?: WeatherData | null;

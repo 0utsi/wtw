@@ -1,9 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { LatLng } from "@/types/common";
-import { WeatherData, SearchHistory } from "@/types/common";
-import { getWeatherData, getSearchHistory } from "@/actions/weather-actions";
+import { LatLng, WeatherData, SearchHistory } from "../types/common";
+import { getWeatherData, getSearchHistory } from "../actions/weather-actions";
 
 export function useWeatherData(location: LatLng | null) {
   return useQuery<WeatherData>({

@@ -2,7 +2,7 @@
 
 import SearchHistory from "./search-history";
 import SearchStatistics from "./search-statistics";
-import { useSearchHistory } from "@/hooks/use-weather-query";
+import { useSearchHistory } from "../../hooks/use-weather-query";
 import { HistorySkeleton, StatisticsSkeleton } from "../ui/skeleton";
 
 export default function SearchHistoryDashboard() {

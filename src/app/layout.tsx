@@ -1,6 +1,6 @@
-import Header from "@/components/layout/header";
-import QueryProvider from "@/providers/query-provider";
-import { Toaster } from "@/components/ui/sonner";
+import Header from "../components/layout/header";
+import QueryProvider from "../providers/query-provider";
+import { Toaster } from "../components/ui/sonner";
 
 import "./globals.css";
 

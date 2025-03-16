@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import WeatherMap from "@/components/map/map";
-import { LatLng } from "@/types/common";
-import SavingLoader from "@/components/ui/saving-loader";
-import WeatherDialog from "@/components/weather/weather-dialog";
-import { useWeatherData } from "@/hooks/use-weather-query";
+import WeatherMap from "../map/map";
+import { LatLng } from "../../types/common";
+import SavingLoader from "../ui/saving-loader";
+import WeatherDialog from "../weather/weather-dialog";
+import {
+  useWeatherData,
+  useSearchHistory,
+} from "../../hooks/use-weather-query";
 import { toast } from "sonner";
-import { useSearchHistory } from "@/hooks/use-weather-query";
 
 interface WeatherClientProps {
   initialLat?: number;
